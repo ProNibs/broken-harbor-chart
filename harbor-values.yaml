@@ -1,0 +1,29 @@
+externalURL: "https://andrew-harbor.tanzuplatform.com"
+harborAdminPassword: Harbor123456
+caSecretName: andrew-harbor.tanzuplatform.com-tls
+caBundleSecretName: andrew-harbor.tanzuplatform.com-tls
+logLevel: debug
+expose:
+    ingress:
+        className: contour
+        hosts:
+            core: andrew-harbor.tanzuplatform.com      
+            notary: andrew-notary.tanzuplatform.com  
+    tls:
+        certSource: secret
+        secret:
+            secretName: andrew-harbor.tanzuplatform.com-tls
+            notarySecretName: andrew-harbor.tanzuplatform.com-tls
+core:
+    secret: w5dlTF1qrIKvfmuJ
+    xsrfKey: VvFTijscqmVOM0fz7qhoLWvu12YRYCKY
+    secretName: andrew-harbor.tanzuplatform.com-tls
+registry:
+    secret: PuzrqhB0zbPW17ut
+    credentials:
+        # This was generated via `openssl passwd -apr1 harbor_registry-password`
+        htpasswdString: "$apr1$YaUePb6p$Ys9iB1Qvdywtths1D8nz11"
+notary:
+    secretName: andrew-harbor.tanzuplatform.com-tls
+jobservice:
+    secret: IxKVXjB46tMjPP0p

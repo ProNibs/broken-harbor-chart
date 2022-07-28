@@ -1,0 +1,28 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: harbor-ca-issuer
+  namespace: harbor
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: harbor-cert
+  namespace: harbor
+spec:
+  isCA: true
+  commonName: andrew-harbor.tanzuplatform.com
+  secretName: andrew-harbor.tanzuplatform.com-tls
+  dnsNames:
+  - andrew-harbor.tanzuplatform.com
+  - andrew-notary.tanzuplatform.com
+  - harbor-app-notary-signer
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: harbor-ca-issuer
+    kind: Issuer
+    group: cert-manager.io
